@@ -1,6 +1,7 @@
 const user = require('../user');
+const skills = require('../skills');
+const secrets = require('../secrets');
 
-// let userInfo = user
 
 module.exports = {
     getName: function(req, res, next){
@@ -90,40 +91,66 @@ module.exports = {
                 restaurants.splice(i, 1);
             }
         }
-        return restaurants;
+        res(200).json(restaurants);
     },
 
     changeName: function(req, res, next){
        var newName = req.body.newName;
        user.name = newName;
+        res(200).send('ok');   
     },
 
     changeLocation: function(req, res, next){
        var newLocation = req.body.newLocation;
-       user.location = newLocation;       
+       user.location = newLocation;
+        res(200).send('ok');         
     },
 
     addNewHobby: function(req, res, next){
        var newHobbyObj = req.body.newHobbyObj;
        user.hobbies.push(newHobbyObj);
+        res(200).send('ok');   
     },
 
     addNewOccupation: function(req, res, next){
        var newOccupation = req.body.newOccupation;
-       user.occupations.push(newOccupation);       
+       user.occupations.push(newOccupation);
+        res(200).send('ok');          
     },
 
     addNewFamilyMember: function(req, res, next){
        var newPersonObj = req.body.newPersonObj;
        user.family.push(newPersonObj);
+        res(200).send('ok');   
     },
 
     addNewRestaurant: function(req, res, next){
        var newRestaurantObj = req.body.newRestaurantObj;
-       user.restaurants.push(newRestaurantObj);       
+       user.restaurants.push(newRestaurantObj);
+        res(200).send('ok');      
     },
 
-    
+    getSkills: function(req, res, next){
+        let skillset = skills.skillset.slice();
+        let experience = req.query.experience;
+        if(experience){
+            for (var i = skillset.length-1; i >= 0; i--){
+                if (skillset[i].experience != experience){
+                    skillset.splice(i, 1);
+                }
+            }
+        }
+        res(200).json({skills: skillset});
+    },
 
+    addSkill: function(req, res, next){
+        let newSkill = req.body;
+        skillset.push(newSkill);
+        res(200).send('ok');
+    },
+
+    getSecrets: function(req, res, next){
+        res(200).json(secrets);
+    }
 
 }

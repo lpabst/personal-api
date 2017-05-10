@@ -1,3 +1,6 @@
+const skills = require('../skills');
+const secrets = require('../secrets');
+
 module.exports = {
     addHeaders: function(req, res, next){
         res.status(200).set({
@@ -11,5 +14,20 @@ module.exports = {
         });
 
         next();
+    },
+
+    generateId: function(req, res, next){
+        let id = skills.length + 1;
+        req.body.id = id;
+
+        next();
+    },
+
+    verifyUser = function(req, res, next){
+        if (req.params.username == 'lpabst' && req.params.password == 'lorenisthebest'){
+            next();
+        }else{
+            res(403).send('Wrong username/password');
+        }
     }
 }

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mainCtrl = require('./controllers/mainCtrl');
 const middleware = require('./controllers/middleware');
 
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -18,14 +19,17 @@ app.get('/family', mainCtrl.getFamily);
 app.get('/family/:gender', mainCtrl.getFamilyByGender);
 app.get('/restaurants', mainCtrl.getRestaurants);
 app.get('/restaurants/:name', mainCtrl.getRestaurantByName);
+app.get('/skills', mainCtrl.getSkills);
+app.get('/secrets/:username/:pin', middleware.verifyUser, mainCtrl.getSecrets);
 
 app.put('/name', mainCtrl.changeName);
 app.put('/location', mainCtrl.changeLocation);
+
 app.post('/hobbies', mainCtrl.addNewHobby);
 app.post('/occupations', mainCtrl.addNewOccupation);
 app.post('/family', mainCtrl.addNewFamilyMember);
 app.post('/restaurants', mainCtrl.addNewRestaurant);
-
+app.post('/skills', middleware.generateId, mainCtrl.addSkill);
 
 
 
