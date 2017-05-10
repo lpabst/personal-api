@@ -5,11 +5,11 @@ const secrets = require('../secrets');
 
 module.exports = {
     getName: function(req, res, next){
-        return {name: user.name};
+        res(200).json({name: user.name});
     },
 
     getLocation: function(req, res, next){
-        return {location: user.location};
+        res(200).json({location: user.location});
     },
 
     getOccupations: function(req, res, next){
@@ -21,16 +21,16 @@ module.exports = {
                 occupations = user.occupations.sort(); 
             }
         }
-        return {occupations: occupations};
+        res(200).json({occupations: occupations});
     },
 
     getLatestOccupation: function(req, res, next){
         let occupations = user.occupations;
-        return {latestOccupation: occupations[occupations.length-1] };
+        res(200).json({latestOccupation: occupations[occupations.length-1] });
     },
 
     getHobbies: function(req, res, next){
-        return {hobbies: user.hobbies};
+        res(200).json({hobbies: user.hobbies});
     },
 
     getHobbiesByType: function(req, res, next){
@@ -41,7 +41,7 @@ module.exports = {
                 hobbies.splice(i--, 1);
             }
         }
-        return {type: hobbies};
+        res(200).json({type: hobbies});
     },
 
     getFamily: function(req, res, next){
@@ -53,10 +53,9 @@ module.exports = {
                     family.splice(i, 1);
                 }
             }
-            return { family: family };
-        }else{
-            return {family: family};    
         }
+        res(200).json({family: family});    
+        
     },
 
     getFamilyByGender: function(req, res, next){
@@ -67,7 +66,7 @@ module.exports = {
                 family.splice(i, 1);
             }
         }
-        return {gender: family};
+        res(200).json({gender: family});
     },
 
     getRestaurants: function(req, res, next){
@@ -80,7 +79,7 @@ module.exports = {
                 }
             }
         }
-        return {restaurants: restaurants};
+        res(200).json({restaurants: restaurants});
     },
 
     getRestaurantByName: function(req, res, next){
