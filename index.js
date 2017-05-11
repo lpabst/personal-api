@@ -20,7 +20,7 @@ app.get('/family/:gender', mainCtrl.getFamilyByGender);
 app.get('/restaurants', mainCtrl.getRestaurants);
 app.get('/restaurants/:name', mainCtrl.getRestaurantByName);
 app.get('/skills', mainCtrl.getSkills);
-app.get('/secrets/:username/:pin', middleware.verifyUser, mainCtrl.getSecrets);
+app.get('/secrets/:username/:password', middleware.verifyUser, mainCtrl.getSecrets);
 
 app.put('/name', mainCtrl.changeName);
 app.put('/location', mainCtrl.changeLocation);

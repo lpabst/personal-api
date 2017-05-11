@@ -26,7 +26,8 @@ var user = {
       name: 'Clayton',
       relation: 'brother',
       gender: 'male'
-    },{
+    },
+    {
       name: 'Lucia',
       relation: 'mom',
       gender: 'female'

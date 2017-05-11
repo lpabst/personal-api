@@ -17,17 +17,17 @@ module.exports = {
     },
 
     generateId: function(req, res, next){
-        let id = skills.length + 1;
+        let id = skills.skillset.length + 1;
         req.body.id = id;
 
         next();
     },
 
-    verifyUser = function(req, res, next){
+    verifyUser: function(req, res, next){
         if (req.params.username == 'lpabst' && req.params.password == 'lorenisthebest'){
             next();
         }else{
-            res(403).send('Wrong username/password');
+            res.status(403).send('Wrong username/password');
         }
     }
 }

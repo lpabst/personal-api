@@ -5,11 +5,11 @@ const secrets = require('../secrets');
 
 module.exports = {
     getName: function(req, res, next){
-        res(200).json({name: user.name});
+        res.status(200).json({name: user.name});
     },
 
     getLocation: function(req, res, next){
-        res(200).json({location: user.location});
+        res.status(200).json({location: user.location});
     },
 
     getOccupations: function(req, res, next){
@@ -21,16 +21,16 @@ module.exports = {
                 occupations = user.occupations.sort(); 
             }
         }
-        res(200).json({occupations: occupations});
+        res.status(200).json({occupations: occupations});
     },
 
     getLatestOccupation: function(req, res, next){
         let occupations = user.occupations;
-        res(200).json({latestOccupation: occupations[occupations.length-1] });
+        res.status(200).json({latestOccupation: occupations[occupations.length-1] });
     },
 
     getHobbies: function(req, res, next){
-        res(200).json({hobbies: user.hobbies});
+        res.status(200).json({hobbies: user.hobbies});
     },
 
     getHobbiesByType: function(req, res, next){
@@ -41,7 +41,7 @@ module.exports = {
                 hobbies.splice(i--, 1);
             }
         }
-        res(200).json({type: hobbies});
+        res.status(200).json({type: hobbies});
     },
 
     getFamily: function(req, res, next){
@@ -54,7 +54,7 @@ module.exports = {
                 }
             }
         }
-        res(200).json({family: family});    
+        res.status(200).json({family: family});    
         
     },
 
@@ -66,7 +66,7 @@ module.exports = {
                 family.splice(i, 1);
             }
         }
-        res(200).json({gender: family});
+        res.status(200).json({gender: family});
     },
 
     getRestaurants: function(req, res, next){
@@ -79,54 +79,55 @@ module.exports = {
                 }
             }
         }
-        res(200).json({restaurants: restaurants});
+        res.status(200).json({restaurants: restaurants});
     },
 
     getRestaurantByName: function(req, res, next){
         let name = req.params.name;
         let restaurants = user.restaurants.slice();
+        console.log(name);
         for (var i = restaurants.length-1; i >= 0; i --){
             if (restaurants[i].name != name){
                 restaurants.splice(i, 1);
             }
         }
-        res(200).json(restaurants);
+        res.status(200).json(restaurants);
     },
 
     changeName: function(req, res, next){
        var newName = req.body.newName;
        user.name = newName;
-        res(200).send('ok');   
+        res.status(200).json({name: user.name});   
     },
 
     changeLocation: function(req, res, next){
        var newLocation = req.body.newLocation;
        user.location = newLocation;
-        res(200).send('ok');         
+        res.status(200).json({location: user.location});         
     },
 
     addNewHobby: function(req, res, next){
        var newHobbyObj = req.body.newHobbyObj;
        user.hobbies.push(newHobbyObj);
-        res(200).send('ok');   
+        res.status(200).json({hobbies: user.hobbies});   
     },
 
     addNewOccupation: function(req, res, next){
        var newOccupation = req.body.newOccupation;
        user.occupations.push(newOccupation);
-        res(200).send('ok');          
+        res.status(200).json({occupations: user.occupations});          
     },
 
     addNewFamilyMember: function(req, res, next){
        var newPersonObj = req.body.newPersonObj;
        user.family.push(newPersonObj);
-        res(200).send('ok');   
+        res.status(200).json(user.family);   
     },
 
     addNewRestaurant: function(req, res, next){
        var newRestaurantObj = req.body.newRestaurantObj;
        user.restaurants.push(newRestaurantObj);
-        res(200).send('ok');      
+        res.status(200).json(user.restaurants);      
     },
 
     getSkills: function(req, res, next){
@@ -139,17 +140,17 @@ module.exports = {
                 }
             }
         }
-        res(200).json({skills: skillset});
+        res.status(200).json({skills: skillset});
     },
 
     addSkill: function(req, res, next){
         let newSkill = req.body;
-        skillset.push(newSkill);
-        res(200).send('ok');
+        skills.skillset.push(newSkill);
+        res.status(200).json(skills.skillset);
     },
 
     getSecrets: function(req, res, next){
-        res(200).json(secrets);
+        res.status(200).json(secrets);
     }
 
 }
